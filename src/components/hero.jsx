@@ -39,9 +39,7 @@ export default function Hero() {
             </div>
 
             <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Passionate developer from Zamboanga City, crafting innovative web solutions with modern technologies.
-              Specialized in React.js, Node.js, and responsive design. Currently pursuing IT studies while
-              building real-world projects and expanding my technical expertise.
+              Email me for projects.
             </p>
 
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 max-w-2xl mx-auto lg:mx-0">
