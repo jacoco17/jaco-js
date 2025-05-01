@@ -21,7 +21,7 @@ export default function Hero() {
             <div className="relative">
               <img 
                 src={jaco} 
-                alt="John Francis" 
+                alt="RIEN BOBERTS" 
                 className="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto object-cover border-4 border-cyan-400 shadow-lg shadow-cyan-500/50"
               />
               <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 to-purple-500/20 animate-pulse"></div>
@@ -31,15 +31,15 @@ export default function Hero() {
           <div className="lg:w-2/3 space-y-6">
             <div>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-                John Francis A. Rivero
+                RIEAN BOB SIBUL
               </h1>
               <h2 className="text-xl md:text-2xl text-cyan-400 mt-2 font-semibold">
-                Full-Stack Developer & IT Student
+                Front-End Developer & IT Student
               </h2>
             </div>
 
             <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
-              Email me for projects.
+            Front-End Developer based in Zamboanga City with a focus on creating efficient and responsive user interfaces.
             </p>
 
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 max-w-2xl mx-auto lg:mx-0">

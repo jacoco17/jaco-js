@@ -57,7 +57,7 @@ const About = () => {
                 >
                   <img 
                     src={profile} 
-                    alt="John Francis" 
+                    alt="RIEN BOBERTS" 
                     className="w-28 h-28 object-cover rounded-full border-2 border-gray-900/30"
                   />
                 </div>
@@ -74,7 +74,7 @@ const About = () => {
             <div className="relative group lg:hidden">
               <img 
                 src={profile} 
-                alt="John Francis" 
+                alt="RIEN BOBERTS" 
                 className={`w-64 h-64 object-cover rounded-2xl mx-auto transition-all duration-500 transform group-hover:scale-105 
                   ${isToggled ? 'border-blue-400/30' : 'border-cyan-400/30'} border-2`}
               />
@@ -116,10 +116,7 @@ const About = () => {
             <div className="prose max-w-none">
               <p className={`text-lg leading-relaxed transition-colors duration-500
                 ${isToggled ? 'text-gray-700' : 'text-gray-300'}`}>
-                I'm a passionate Full-Stack Developer and IT student with a keen interest in creating 
-                innovative web solutions. My journey in technology started with a curiosity about how 
-                things work on the internet, which led me to pursue a career in web development.
-              </p>
+Currently studying Information Technology and gaining practical experience through hands-on web development projects.              </p>
            
             </div>
 
