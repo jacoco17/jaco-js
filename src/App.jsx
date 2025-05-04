@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FiGithub, FiLinkedin } from 'react-icons/fi';
-import Hero from './components/Hero';
-import About from './components/About';
-import Blog from './components/Blog';
-import Projects from './components/Projects';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
+import Hero from './components/Hero.jsx';
+import About from './components/About.jsx';
+import Blog from './components/Blog.jsx';
+import Projects from './components/Projects.jsx';
+import Experience from './components/Experience.jsx';
+import Contact from './components/Contact.jsx';
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
