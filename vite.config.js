@@ -11,6 +11,6 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, 'src')
     },
-    extensions: ['.js', '.jsx', '.json'] // Explicitly list extensions to resolve
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'] // Added more extensions to be safe
   }
 })
