@@ -43,23 +43,30 @@ export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(null);
 
   return (
-    <section id="projects" className="min-h-screen py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="relative min-h-screen bg-zinc-950 py-24 px-4 sm:px-6 lg:px-8">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2230%22%20height%3D%2230%22%20viewBox%3D%220%200%2030%2030%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1.22676%200C1.91374%200%202.45351%200.539773%202.45351%201.22676C2.45351%201.91374%201.91374%202.45351%201.22676%202.45351C0.539773%202.45351%200%201.91374%200%201.22676C0%200.539773%200.539773%200%201.22676%200Z%22%20fill%3D%22rgba(200%2C200%2C200%2C0.15)%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E')] opacity-20"></div>
+      </div>
+      
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900"></div>
+      
+      <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-block relative mb-4">
-            <h2 className="text-5xl font-bold text-white">Projects</h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-            <div className="absolute -bottom-2 left-1/4 right-1/4 h-1 bg-gradient-to-r from-indigo-500 to-blue-400 blur-sm"></div>
-          </div>
-          <p className="text-gray-400 max-w-xl mx-auto">Explore my latest work and projects that showcase my skills and expertise in web development and design.</p>
+          <h2 className="text-5xl font-light tracking-tighter text-white mb-4">
+            My <span className="text-emerald-400">Projects</span>
+          </h2>
+          <div className="h-px w-16 mx-auto bg-emerald-400/50 mb-8"></div>
+          <p className="text-zinc-400 max-w-xl mx-auto">A collection of my recent work showcasing my skills in web development and design.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-8">
+        <div className="space-y-16">
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -68,32 +75,37 @@ export default function Projects() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onHoverStart={() => setActiveIndex(index)}
               onHoverEnd={() => setActiveIndex(null)}
-              className="group relative overflow-hidden"
+              className="group"
             >
-              <div className={`flex flex-col md:flex-row bg-gradient-to-br from-gray-800/40 via-gray-800/60 to-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-lg transition-all duration-500 ${activeIndex === index ? 'shadow-blue-500/20' : ''}`}>
-                <div className="relative md:w-2/5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className={`flex flex-col md:flex-row border border-zinc-800 ${activeIndex === index ? 'border-emerald-400/30' : ''} transition-colors duration-300`}>
+                {/* Left - Image */}
+                <div className="relative md:w-2/5 h-64 md:h-auto overflow-hidden">
+                  <div className="absolute inset-0 bg-zinc-900/50 group-hover:bg-zinc-900/20 transition-colors duration-500"></div>
                   <img 
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+                  {index % 2 === 0 && (
+                    <div className="absolute -top-2 -left-2 w-10 h-10 border-t-2 border-l-2 border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  )}
+                  {index % 2 === 1 && (
+                    <div className="absolute -bottom-2 -left-2 w-10 h-10 border-b-2 border-l-2 border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  )}
                 </div>
                 
-                <div className="relative p-8 md:w-3/5 flex flex-col justify-between z-10">
+                {/* Right - Content */}
+                <div className="p-8 md:w-3/5 flex flex-col justify-between">
                   <div>
-                    <div className="flex items-center mb-3">
-                      <div className="h-px w-8 bg-blue-400 mr-3"></div>
-                      <p className="text-blue-400 text-sm font-medium uppercase tracking-wider">Project {index + 1}</p>
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">{project.title}</h3>
-                    <p className="text-gray-400 mb-6">{project.description}</p>
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <p className="text-emerald-400 font-light tracking-widest uppercase text-xs mb-2">Project {index + 1}</p>
+                    <h3 className="text-2xl font-light text-white mb-4">{project.title}</h3>
+                    <p className="text-zinc-400 mb-6">{project.description}</p>
+                    
+                    <div className="flex flex-wrap gap-2 mb-8">
                       {project.technologies.map((tech, techIndex) => (
                         <span
                           key={techIndex}
-                          className="px-3 py-1 bg-gray-700/30 text-gray-300 rounded-full text-sm border border-gray-600/30 hover:border-blue-400/30 transition-colors duration-300"
+                          className="px-3 py-1 border border-zinc-800 text-zinc-400 text-sm"
                         >
                           {tech}
                         </span>
@@ -101,31 +113,28 @@ export default function Projects() {
                     </div>
                   </div>
                   
-                  <div className="flex items-center">
-                    <a
-                      href={project.link}
-                      className="relative inline-flex items-center gap-2 px-6 py-3 overflow-hidden rounded-full group/button"
+                  <a
+                    href={project.link}
+                    className="self-start px-6 py-2 border border-zinc-800 text-white hover:border-emerald-400 transition-colors duration-300 inline-flex items-center gap-2 group/btn"
+                  >
+                    <span>View Project</span>
+                    <svg
+                      className="w-4 h-4 text-emerald-400 transform group-hover/btn:translate-x-1 transition-transform duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      <span className="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-r from-blue-500 to-indigo-600 opacity-0 group-hover/button:opacity-100 transition-opacity duration-300"></span>
-                      <span className="absolute left-0 right-0 top-0 bottom-0 bg-gradient-to-r from-blue-500/40 to-indigo-600/40 blur-xl opacity-0 group-hover/button:opacity-100 transition-opacity duration-300"></span>
-                      <span className="relative z-10 text-white font-medium group-hover/button:text-white transition-colors duration-300">
-                        View Project
-                      </span>
-                      <svg
-                        className="w-5 h-5 relative z-10 text-blue-400 group-hover/button:text-white transition-colors duration-300 transform group-hover/button:translate-x-1 transition-transform duration-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </a>
-                  </div>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </a>
                 </div>
                 
-                {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                {index % 2 === 0 && (
+                  <div className="absolute -bottom-2 -right-2 w-10 h-10 border-b-2 border-r-2 border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                )}
+                {index % 2 === 1 && (
+                  <div className="absolute -top-2 -right-2 w-10 h-10 border-t-2 border-r-2 border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                )}
               </div>
             </motion.div>
           ))}

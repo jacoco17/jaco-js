@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenuAlt4, HiX } from 'react-icons/hi';
-import { FiGithub, FiLinkedin, FiMoon, FiSun } from 'react-icons/fi';
+import { HiMenu, HiX } from 'react-icons/hi';
+import { FiGithub, FiLinkedin } from 'react-icons/fi';
 import Hero from './components/Hero';
 import About from './components/About';
 import Blog from './components/Blog';
@@ -13,7 +13,6 @@ import Contact from './components/Contact';
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [darkMode, setDarkMode] = useState(true);
   
   // Track scroll position
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function App() {
 
   return (
     <Router>
-      <div className={`${darkMode ? 'bg-[#0A1122] text-white' : 'bg-gray-50 text-gray-900'} min-h-screen transition-colors duration-500`}>
+      <div className="bg-zinc-950 text-zinc-200 min-h-screen">
         {/* Navbar */}
         <motion.nav 
           initial={{ y: -100 }}
@@ -42,68 +41,42 @@ export default function App() {
           transition={{ duration: 0.5 }}
           className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
             scrollPosition > 50 
-              ? darkMode
-                ? 'bg-[#0A1122]/80 backdrop-blur-md border-b border-[#4361ee]/10'
-                : 'bg-white/80 backdrop-blur-md border-b border-gray-200/50'
-              : 'bg-transparent'
+              ? 'bg-zinc-950/90 backdrop-blur-md border-b border-zinc-800'
+              : 'bg-zinc-950/50 backdrop-blur-sm md:bg-transparent'
           }`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               {/* Logo */}
               <Link to="/" className="flex items-center space-x-2 focus:outline-none">
-                <div className="relative">
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className={`h-10 w-10 rounded-xl flex items-center justify-center ${
-                      darkMode
-                        ? 'bg-gradient-to-br from-[#22d3ee] to-[#a855f7] shadow-lg shadow-purple-500/20'
-                        : 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/20'
-                    }`}
-                  >
-                    <span className="text-white font-bold text-xl">R</span>
-                  </motion.div>
+                <div className="text-2xl font-light tracking-tight">
+                  <span className="text-white font-medium">R</span>
+                  <span className="text-emerald-400 font-medium">.</span>
                 </div>
-                <motion.span 
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className={`hidden sm:block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-                >
-                  Riean Bob Sibul
-                </motion.span>
               </Link>
 
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-1">
-                {['home', 'about', 'projects', 'experience', 'blog', 'contact'].map((item) => (
+              <div className="hidden md:flex items-center space-x-8">
+                {['home', 'about', 'projects', 'experience', 'contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
-                    className={`px-4 py-2 text-sm font-medium ${
-                      darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'
-                    } rounded-full transition-all duration-300 hover:bg-white/10 relative group focus:outline-none`}
+                    className="text-zinc-400 hover:text-white text-sm uppercase tracking-wide font-medium transition-colors duration-300 focus:outline-none"
                   >
-                    <span className="relative z-10 capitalize">{item}</span>
-                    <span className={`absolute bottom-1.5 left-4 right-4 h-0.5 ${
-                      darkMode 
-                        ? 'bg-gradient-to-r from-[#22d3ee] to-[#a855f7]' 
-                        : 'bg-gradient-to-r from-blue-500 to-indigo-600'
-                    } transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 origin-left`} />
+                    {item}
                   </button>
                 ))}
               </div>
 
-              <div className="flex items-center gap-4">
-                {/* Social Icons - Desktop Only */}
-                <div className="hidden md:flex items-center gap-3">
+              <div className="flex items-center gap-6">
+                {/* Social Icons */}
+                <div className="hidden md:flex items-center gap-5">
                   <a 
                     href="https://github.com"
                     target="_blank"
                     rel="noreferrer"
-                    className={`text-lg ${
-                      darkMode ? 'text-gray-400 hover:text-[#22d3ee]' : 'text-gray-500 hover:text-blue-600'
-                    } transition-colors`}
+                    className="text-zinc-500 hover:text-emerald-400 transition-colors"
+                    aria-label="GitHub"
                   >
                     <FiGithub />
                   </a>
@@ -111,39 +84,23 @@ export default function App() {
                     href="https://linkedin.com"
                     target="_blank"
                     rel="noreferrer"
-                    className={`text-lg ${
-                      darkMode ? 'text-gray-400 hover:text-[#22d3ee]' : 'text-gray-500 hover:text-blue-600'
-                    } transition-colors`}
+                    className="text-zinc-500 hover:text-emerald-400 transition-colors"
+                    aria-label="LinkedIn"
                   >
                     <FiLinkedin />
                   </a>
                 </div>
-                
-                {/* Theme Toggle */}
-                <button 
-                  onClick={() => setDarkMode(!darkMode)}
-                  className={`p-2 rounded-full ${
-                    darkMode 
-                      ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
-                  } transition-colors focus:outline-none`}
-                >
-                  {darkMode ? <FiSun className="text-lg" /> : <FiMoon className="text-lg" />}
-                </button>
 
                 {/* Mobile menu button */}
                 <button
                   onClick={() => setIsOpen(!isOpen)}
-                  className={`md:hidden p-2 rounded-full ${
-                    darkMode 
-                      ? 'text-gray-400 hover:text-white hover:bg-gray-800' 
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-200'
-                  } transition-colors focus:outline-none`}
+                  className="md:hidden text-zinc-400 hover:text-white transition-colors focus:outline-none"
+                  aria-label="Toggle menu"
                 >
                   {isOpen ? (
                     <HiX className="h-6 w-6" />
                   ) : (
-                    <HiMenuAlt4 className="h-6 w-6" />
+                    <HiMenu className="h-6 w-6" />
                   )}
                 </button>
               </div>
@@ -160,34 +117,25 @@ export default function App() {
                 transition={{ duration: 0.3 }}
                 className="md:hidden overflow-hidden"
               >
-                <div className={`px-4 py-4 space-y-2 ${
-                  darkMode
-                    ? 'bg-[#0A1122]/95 backdrop-blur-md'
-                    : 'bg-white/95 backdrop-blur-md'
-                }`}>
-                  {['home', 'about', 'projects', 'experience', 'blog', 'contact'].map((item) => (
+                <div className="bg-zinc-900/95 backdrop-blur-md px-4 py-5 space-y-3 border-b border-zinc-800">
+                  {['home', 'about', 'projects', 'experience', 'contact'].map((item) => (
                     <button
                       key={item}
                       onClick={() => scrollToSection(item)}
-                      className={`block w-full text-left px-4 py-3 rounded-xl text-base font-medium ${
-                        darkMode 
-                          ? 'text-gray-300 hover:text-white hover:bg-[#1a2747]/60' 
-                          : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
-                      } transition-colors duration-300 focus:outline-none capitalize`}
+                      className="block w-full text-left px-4 py-2 text-zinc-400 hover:text-white text-base uppercase tracking-wide font-light transition-colors duration-300 focus:outline-none"
                     >
                       {item}
                     </button>
                   ))}
                   
                   {/* Social links for mobile */}
-                  <div className="flex gap-4 px-4 pt-4 border-t border-gray-700/20">
+                  <div className="flex gap-6 px-4 pt-4 border-t border-zinc-800">
                     <a 
                       href="https://github.com"
                       target="_blank"
                       rel="noreferrer"
-                      className={`p-2 rounded-full ${
-                        darkMode ? 'text-gray-400 hover:text-[#22d3ee] hover:bg-[#1a2747]/60' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-100'
-                      } transition-colors`}
+                      className="text-zinc-500 hover:text-emerald-400 transition-colors"
+                      aria-label="GitHub"
                     >
                       <FiGithub className="text-xl" />
                     </a>
@@ -195,9 +143,8 @@ export default function App() {
                       href="https://linkedin.com"
                       target="_blank"
                       rel="noreferrer"
-                      className={`p-2 rounded-full ${
-                        darkMode ? 'text-gray-400 hover:text-[#22d3ee] hover:bg-[#1a2747]/60' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-100'
-                      } transition-colors`}
+                      className="text-zinc-500 hover:text-emerald-400 transition-colors"
+                      aria-label="LinkedIn"
                     >
                       <FiLinkedin className="text-xl" />
                     </a>
@@ -209,7 +156,7 @@ export default function App() {
         </motion.nav>
 
         {/* Main Content */}
-        <main>
+        <main className="pt-16">
           <section id="home">
             <Hero />
           </section>
@@ -221,9 +168,6 @@ export default function App() {
           </section>
           <section id="experience">
             <Experience />
-          </section>
-          <section id="blog">
-            <Blog />
           </section>
           <section id="contact">
             <Contact />
