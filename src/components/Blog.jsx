@@ -328,7 +328,21 @@ export default function Blog() {
           </motion.div>
         )}
         
-     
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-20 text-center"
+        >
+          <p className="text-zinc-400 mb-5">Want to plan your own adventure to Zamboanga?</p>
+          <a 
+            href="#contact" 
+            className="inline-block px-8 py-3 bg-zinc-900 border border-zinc-800 text-white hover:border-emerald-400 transition-colors duration-300"
+          >
+            Contact me for travel tips
+          </a>
+        </motion.div>
       </div>
     </div>
   );
