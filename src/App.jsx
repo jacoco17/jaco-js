@@ -57,7 +57,7 @@ export default function App() {
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-8">
-                {['home', 'about', 'projects', 'experience', 'contact'].map((item) => (
+                {['home', 'about', 'projects', 'blog', 'experience', 'contact'].map((item) => (
                   <button
                     key={item}
                     onClick={() => scrollToSection(item)}
@@ -118,7 +118,7 @@ export default function App() {
                 className="md:hidden overflow-hidden"
               >
                 <div className="bg-zinc-900/95 backdrop-blur-md px-4 py-5 space-y-3 border-b border-zinc-800">
-                  {['home', 'about', 'projects', 'experience', 'contact'].map((item) => (
+                  {['home', 'about', 'projects', 'blog', 'experience', 'contact'].map((item) => (
                     <button
                       key={item}
                       onClick={() => scrollToSection(item)}
@@ -165,6 +165,9 @@ export default function App() {
           </section>
           <section id="projects">
             <Projects />
+          </section>
+          <section id="blog">
+            <Blog />
           </section>
           <section id="experience">
             <Experience />

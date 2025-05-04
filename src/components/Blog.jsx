@@ -173,20 +173,32 @@ export default function Blog() {
   const post = blogPosts.find(post => post.id === activePost);
   
   return (
-    <section id="blog" className="min-h-screen py-20 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-zinc-950 py-24 px-4 sm:px-6 lg:px-8">
+      {/* Subtle background pattern - matching the Hero component */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml,%3Csvg%20width%3D%2230%22%20height%3D%2230%22%20viewBox%3D%220%200%2030%2030%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M1.22676%200C1.91374%200%202.45351%200.539773%202.45351%201.22676C2.45351%201.91374%201.91374%202.45351%201.22676%202.45351C0.539773%202.45351%200%201.91374%200%201.22676C0%200.539773%200.539773%200%201.22676%200Z%22%20fill%3D%22rgba(200%2C200%2C200%2C0.15)%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E')] opacity-20"></div>
+      </div>
+      
+      {/* Subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-zinc-950 to-zinc-900"></div>
+      
+      {/* Main content */}
+      <div className="container mx-auto max-w-6xl relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-block relative mb-4">
-            <h2 className="text-5xl font-bold text-white">7 Days in Zamboanga</h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-indigo-500"></div>
-            <div className="absolute -bottom-2 left-1/4 right-1/4 h-1 bg-gradient-to-r from-indigo-500 to-blue-400 blur-sm"></div>
-          </div>
-          <p className="text-gray-400 max-w-xl mx-auto">A week-long adventure exploring the hidden gems and breathtaking landscapes of Zamboanga City and its surroundings.</p>
+          <p className="text-emerald-400 font-light mb-4 tracking-widest uppercase text-sm">
+            Travel Journal
+          </p>
+          <h2 className="text-5xl md:text-6xl font-light tracking-tighter text-white mb-5">
+            7 Days in <span className="text-emerald-400">Zamboanga</span>
+          </h2>
+          <p className="text-zinc-400 max-w-2xl mx-auto">
+            A week-long adventure exploring the hidden gems and breathtaking landscapes of Zamboanga City and its surroundings.
+          </p>
         </motion.div>
 
         {/* Day Selector Tabs */}
@@ -197,15 +209,15 @@ export default function Blog() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: post.id * 0.05 }}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activePost === post.id 
-                  ? 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-md shadow-blue-500/20' 
-                  : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-800'
-              }`}
               onClick={() => {
                 setActivePost(post.id);
                 setIsExpanded(false);
               }}
+              className={`px-5 py-2 text-sm uppercase tracking-wide font-medium transition-all duration-300 ${
+                activePost === post.id 
+                  ? 'text-emerald-400 border-b-2 border-emerald-400' 
+                  : 'text-zinc-500 hover:text-zinc-300 border-b-2 border-transparent'
+              }`}
             >
               Day {post.id}
             </motion.button>
@@ -219,23 +231,22 @@ export default function Blog() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-gray-800/40 via-gray-800/60 to-gray-800/40 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700/30 shadow-xl relative"
+            className="bg-zinc-900/30 border border-zinc-800 rounded-sm overflow-hidden shadow-lg relative"
           >
             {/* Header Image */}
-            <div className="relative h-64 md:h-96 overflow-hidden">
+            <div className="relative h-64 md:h-80 overflow-hidden">
               <img 
                 src={post.headerImage} 
                 alt={post.title}
                 className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent opacity-70"></div>
               
               {/* Post Info Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                 <div className="flex items-center mb-3">
-                  <div className="h-px w-8 bg-blue-400 mr-3"></div>
-                  <p className="text-blue-400 text-sm font-medium uppercase tracking-wider">{post.date}</p>
-                  <div className="ml-auto flex items-center text-gray-300 text-sm">
+                  <p className="text-emerald-400 text-sm uppercase tracking-wider">{post.date}</p>
+                  <div className="ml-auto flex items-center text-zinc-400 text-sm">
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
@@ -243,151 +254,82 @@ export default function Blog() {
                   </div>
                 </div>
                 
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h3 className="text-3xl md:text-4xl font-light tracking-tight text-white mb-4">
                   {post.title}
                 </h3>
-                
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm mr-3">
-                    RB
-                  </div>
-                  <p className="text-gray-300 text-sm">
-                    By <span className="text-blue-400 font-medium">{post.author}</span>
-                  </p>
-                </div>
               </div>
             </div>
             
             {/* Post Content */}
             <div className="p-6 md:p-8">
-              <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                {post.excerpt}
-              </p>
-              
-              {isExpanded && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <p className="text-gray-400 mb-8">
-                    This adventure was part of our week-long exploration of Zamboanga's diverse landscapes and rich cultural heritage. Each day brought new discoveries and unforgettable experiences as we immersed ourselves in the natural beauty and local traditions of this remarkable region.
-                  </p>
-                  
-                  {/* Tour Images Section */}
-                  <h4 className="text-xl font-bold text-white mb-6 flex items-center">
-                    <span className="w-8 h-1 bg-blue-400 mr-3"></span>
-                    Tour Highlights
-                  </h4>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    {post.tourImages.map((image, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="group relative overflow-hidden rounded-lg"
-                      >
-                        <div className="relative h-64 overflow-hidden rounded-lg">
-                          <img 
-                            src={image.url} 
-                            alt={image.caption}
-                            className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/50 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-300"></div>
-                          
-                          <div className="absolute bottom-0 left-0 right-0 p-4">
-                            <p className="text-white text-sm font-medium">{image.caption}</p>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-zinc-400 leading-relaxed mb-6">
+                  {post.excerpt}
+                </p>
+                
+                {isExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.4 }}
+                    className="space-y-8 mt-10"
+                  >
+                    {/* Gallery */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {post.tourImages.map((image, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: index * 0.1 }}
+                          className="relative group"
+                        >
+                          <div className="overflow-hidden border border-zinc-800">
+                            <img 
+                              src={image.url} 
+                              alt={image.caption} 
+                              className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
                           </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                  
-                  <Link 
-                    to={`/blog/${post.id}`}
-                    className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium rounded-full hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
-                  >
-                    Read Full Article
-                  </Link>
-                </motion.div>
-              )}
+                          <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-zinc-950 to-transparent">
+                            <p className="text-zinc-300 text-sm">{image.caption}</p>
+                          </div>
+                          
+                          {/* Accent corner matching the Hero component style */}
+                          <div className="absolute -top-1 -left-1 w-6 h-6 border-t border-l border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute -bottom-1 -right-1 w-6 h-6 border-b border-r border-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    {/* Additional content could go here */}
+                    <div className="text-zinc-400 space-y-4">
+                      <p>
+                        As we ventured through the diverse landscapes of Zamboanga, each moment revealed new wonders and experiences, connecting us with both nature and local culture in meaningful ways.
+                      </p>
+                      <p>
+                        The rich biodiversity and warm hospitality of the locals made this journey truly unforgettable, leaving us with memories that will last a lifetime.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
               
-              {!isExpanded && (
-                <div className="flex justify-center">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setIsExpanded(true)}
-                    className="inline-flex items-center px-6 py-3 border-2 border-blue-400 text-blue-400 font-medium rounded-full hover:bg-blue-400/10 transition-all duration-300"
-                  >
-                    <span>Read More</span>
-                    <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </motion.button>
-                </div>
-              )}
-            </div>
-            
-            {/* Day Indicator */}
-            <div className="absolute top-4 right-4 flex items-center bg-gray-900/80 backdrop-blur-sm px-3 py-1 rounded-full border border-blue-500/30 shadow-lg">
-              <div className="w-2 h-2 rounded-full bg-blue-400 mr-2"></div>
-              <span className="text-xs text-gray-300">Day {post.id} of 7</span>
+              {/* Read More / Show Less Button */}
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="px-8 py-3 bg-zinc-900 border border-zinc-800 text-white hover:border-emerald-400 transition-colors duration-300"
+                >
+                  {isExpanded ? 'Show Less' : 'Read More'}
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
         
-        {/* Navigation Arrows */}
-        <div className="flex justify-between mt-8">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setActivePost(prev => prev > 1 ? prev - 1 : 7);
-              setIsExpanded(false);
-            }}
-            className="p-3 rounded-full bg-gray-800/70 text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </motion.button>
-          
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setActivePost(prev => prev < 7 ? prev + 1 : 1);
-              setIsExpanded(false);
-            }}
-            className="p-3 rounded-full bg-gray-800/70 text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300"
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </motion.button>
-        </div>
-        
-        {/* View All Blog Posts Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <Link 
-            to="/blog"
-            className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-medium rounded-full hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
-          >
-            <span>View All Blog Posts</span>
-            <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </Link>
-        </motion.div>
+     
       </div>
-    </section>
+    </div>
   );
 } 
